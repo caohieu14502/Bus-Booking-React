@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import HomeRegister from "../component/HomeRegister";
-import { TERipple } from "tw-elements-react";
 import GoodComments from "../component/GoodComments";
 import Api, { endpoints } from "../configs/Api";
 import MySpinner from "../component/MySpinner";
@@ -8,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
 	const [routes, setRoutes] = useState(null);
+	// Paied Context
 
 	useEffect(() => {
 		const loadRoutes = async () => {

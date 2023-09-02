@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TripItem from "../component/TripItem";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Api, { endpoints } from "../configs/Api";
 import MySpinner from "../component/MySpinner";
 
@@ -31,7 +31,7 @@ const TripPage = () => {
 
 	if (trips.length === 0)
 		return (
-			<div class='my-4 mt-6 text-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800' role='alert'>
+			<div class='my-4 mt-6 flex justify-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800' role='alert'>
 				<span class='mr-2'>
 					<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' class='h-5 w-5'>
 						<path
@@ -50,7 +50,7 @@ const TripPage = () => {
 			<h1>TRIP PAGE</h1>
 			<div className='grid grid-rows-1 gap-4'>
 				{trips.map((t) => (
-					<TripItem {...t} onClick={() => nav(`/trips/${t.id}`)} />
+					<TripItem {...t} key={t.id} onClick={() => nav(`/trips/${t.id}`)} />
 				))}
 			</div>
 		</>

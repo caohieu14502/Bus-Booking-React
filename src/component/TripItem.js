@@ -1,9 +1,9 @@
 const TripItem = (props) => {
 	return (
 		<>
-			<div className='border p-20px flex justify-between rounded-3xl w-3/4 m-auto h-[130px] shadow hover:border-indigo-500/100 hover:shadow-sm transition-shadow hover:cursor-pointer hover:shadow-indigo-400' onClick={props.onClick}>
+			<div className='border p-20px flex justify-between rounded-3xl w-3/4 m-auto h-[130px] shadow hover:border-indigo-500/100 hover:shadow-sm transition-shadow hover:cursor-pointer hover:shadow-indigo-400' onClick={props.onClick} key={props.key}>
 				<div className='flex justify-center flex-col ml-[20px]'>
-					<img src={props.routeId.destination.picture} className='w-[120px] rounded-md shadow-lg'></img>
+					<img src={props.routeId.destination.picture} alt='' className='w-[120px] rounded-md shadow-lg'></img>
 				</div>
 				<div className='info flex justify-around items-center w-3/6'>
 					<div className='from w-3/6'>

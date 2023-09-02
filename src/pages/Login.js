@@ -3,12 +3,13 @@ import { TEInput, TERipple } from "tw-elements-react";
 import Api, { authApi, endpoints } from "../configs/Api";
 import cookie from "react-cookies";
 import { MyUserContext } from "../App";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 const Login = () => {
 	const [user, dispatch] = useContext(MyUserContext);
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 	const [err, setErr] = useState(null);
+	const [q] = useSearchParams();
 
 	const login = (e) => {
 		e.preventDefault();
@@ -44,7 +45,11 @@ const Login = () => {
 		process();
 	};
 
-	if (user !== null) return <Navigate to='/' />;
+	if (user !== null) {
+		let next = q.get("next") || "/";
+
+		return <Navigate to={next} />;
+	}
 
 	return (
 		<>

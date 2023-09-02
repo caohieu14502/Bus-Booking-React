@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../component/SearchBar";
 import { useContext } from "react";
-import { MyUserContext } from "../App";
+import { MyCartContext, MyUserContext } from "../App";
 import Avatar from "../component/Avatar";
+import tickets from "../asset/img/tickets.png";
 
 const Header = () => {
 	const [user, dispatch] = useContext(MyUserContext);
+	const [cartCounter] = useContext(MyCartContext);
+	const nav = useNavigate();
 
 	const logout = () => {
 		dispatch({
@@ -57,6 +60,12 @@ const Header = () => {
 									<path fillRule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clipRule='evenodd' />
 								</svg>
 							</button>
+						</div>
+						<div onClick={() => nav("/cart")} className='hover:cursor-pointer relative inline-flex w-fit'>
+							<div className='absolute bottom-auto left-auto right-0 top-1 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-400 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white'>
+								{cartCounter}
+							</div>
+							<img src={tickets} className='w-[25px] h-[25px]' alt='' loading='lazy' />
 						</div>
 						{user === null ? (
 							<Link to='/login' className='text-sm font-semibold leading-6 text-gray-900'>

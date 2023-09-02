@@ -9,9 +9,11 @@ export const endpoints = {
 	routes: `${SERVER_CONTEXT}/api/routes/`,
 	trips: `${SERVER_CONTEXT}/api/trips/`,
 	tripDetail: (tripId) => `${SERVER_CONTEXT}/api/trips/${tripId}`,
+	ticketsTrip: (tripId) => `${SERVER_CONTEXT}/api/tickets/?tripId=${tripId}`,
 	login: `${SERVER_CONTEXT}/api/login/`,
 	register: `${SERVER_CONTEXT}/api/users/`,
 	currentUser: `${SERVER_CONTEXT}/api/current-user/`,
+	pay: `${SERVER_CONTEXT}/api/pay/`,
 };
 
 export const authApi = () => {
