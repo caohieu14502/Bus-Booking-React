@@ -6,13 +6,28 @@ import { MyUserContext } from "../App";
 import jwt_decode from "jwt-decode";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 const Login = () => {
-	const [googleMail, setGoogleMail] = useState(null);
 	function handleCallbackResponse(response) {
 		console.log("Encoded JWT ID token: " + response.credential);
 		var userObject = jwt_decode(response.credential);
 		console.log(userObject);
 		cookie.save("token", response.credential);
-		setGoogleMail(response.credential);
+
+		const process = async () => {
+			try {
+				let { data } = await authApi().get(endpoints["currentUser"]);
+				cookie.save("user", data);
+
+				dispatch({
+					type: "login",
+					payload: data,
+				});
+			} catch (ex) {
+				console.error(ex);
+				setErr("Something wrong happened! Please try again later.");
+			}
+		};
+
+		process();
 	}
 
 	useEffect(() => {
@@ -66,17 +81,17 @@ const Login = () => {
 		process();
 	};
 
-	const testGoogle = () => {
-		let form = new FormData();
-		form.append("tokenId", googleMail);
-		const process = async () => {
-			let res = await Api.post(endpoints["googleTest"], form);
-			if (res.status === 200) {
-				console.log("LOG IN SUCCESS");
-			}
-		};
-		process();
-	};
+	// const testGoogle = () => {
+	// 	let form = new FormData();
+	// 	form.append("tokenId", googleMail);
+	// 	const process = async () => {
+	// 		let res = await Api.post(endpoints["googleTest"], form);
+	// 		if (res.status === 200) {
+	// 			console.log("LOG IN SUCCESS");
+	// 		}
+	// 	};
+	// 	process();
+	// };
 
 	if (user !== null) {
 		let next = q.get("next") || "/";
@@ -112,7 +127,7 @@ const Login = () => {
 									{/* <!-- Facebook button--> */}
 									<TERipple rippleColor='light'>
 										<button
-											onClick={testGoogle}
+											// onClick={testGoogle}
 											className='mx-1 h-9 w-9 rounded-full bg-primary uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]'>
 											{/* <!-- Facebook --> */}
 											<svg xmlns='http://www.w3.org/2000/svg' className='mx-auto h-3.5 w-3.5' fill='currentColor' viewBox='0 0 24 24'>
