@@ -4,13 +4,14 @@ import Home from "./pages/Home";
 import Footer from "./layout/Footer";
 import TripPage from "./pages/TripPage";
 import Login from "./pages/Login";
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import MyUserReducer from "./reducers/MyUserReducer";
 import cookie from "react-cookies";
 import Register from "./pages/Register";
 import TripDetail from "./pages/TripDetail";
 import MyCartCounterReducer from "./reducers/MyCartCounterReducer";
 import Cart from "./pages/Cart";
+import PrintTicket from "./pages/PrintTicket";
 
 export const MyUserContext = createContext();
 export const MyCartContext = createContext();
@@ -37,6 +38,7 @@ const App = () => {
 						<Route path='/login' element={<Login />} />
 						<Route path='/register' element={<Register />} />
 						<Route path='/cart' element={<Cart />} />
+						<Route path='/printTicket' element={<PrintTicket />} />
 					</Routes>
 					<Footer />
 				</BrowserRouter>

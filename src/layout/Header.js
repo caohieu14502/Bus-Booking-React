@@ -6,11 +6,12 @@ import Avatar from "../component/Avatar";
 import tickets from "../asset/img/tickets.png";
 
 const Header = () => {
-	const [user, dispatch] = useContext(MyUserContext);
 	const [cartCounter] = useContext(MyCartContext);
 	const nav = useNavigate();
 
+	const [user, dispatch] = useContext(MyUserContext);
 	const logout = () => {
+		console.log("Log out");
 		dispatch({
 			type: "logout",
 		});
@@ -73,7 +74,7 @@ const Header = () => {
 							</Link>
 						) : (
 							<>
-								<Avatar logout={() => logout} user={user} />
+								<Avatar logout={logout} user={user} />
 							</>
 						)}
 					</div>
