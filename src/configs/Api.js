@@ -16,7 +16,9 @@ export const endpoints = {
 	printUserTicket: `${SERVER_CONTEXT}/api/userMail/`,
 	printTicket: `${SERVER_CONTEXT}/api/printTicket/`,
 	pay: `${SERVER_CONTEXT}/api/pay/`,
+	addComment: `${SERVER_CONTEXT}/api/comments/`,
 	googleTest: `${SERVER_CONTEXT}/api/login/google/`,
+	comment: (tripId) => `${SERVER_CONTEXT}/api/trips/${tripId}/comments`,
 };
 
 export const authApi = () => {

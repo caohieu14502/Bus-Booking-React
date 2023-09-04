@@ -1,17 +1,23 @@
 import React from "react";
-import { Page, Text, Document, StyleSheet } from "@react-pdf/renderer";
+import { Page, Text, Document, StyleSheet, Font } from "@react-pdf/renderer";
+
+Font.register({
+	family: "vietnam",
+	src: "https://fonts.gstatic.com/s/roboto/v29/KFOlCnqEu92Fr1MmSU5vAw.ttf",
+});
 
 const styles = StyleSheet.create({
 	body: {
 		paddingTop: 35,
 		paddingBottom: 65,
 		paddingHorizontal: 35,
+		fontFamily: "vietnam",
 	},
 	text: {
 		margin: 12,
 		fontSize: 14,
 		textAlign: "justify",
-		fontFamily: "AntonFamily",
+		fontFamily: "vietnam",
 	},
 	pageNumber: {
 		position: "absolute",
@@ -21,45 +27,41 @@ const styles = StyleSheet.create({
 		right: 0,
 		textAlign: "center",
 		color: "grey",
-		fontFamily: "AntonFamily",
+		fontFamily: "vietnam",
 	},
 	title: {
 		fontSize: 24,
 		textAlign: "center",
-		fontFamily: "Oswald",
+		fontFamily: "vietnam",
 	},
 });
 
-const PDFFile = ({ ticket, user, staff }) => {
-	<Document>
-		<Page>
-			<Text style={styles.title}>TICKET</Text>
-			<Text style={styles.text}>
-				Route: {ticket.tripId.routeId.origin.province} to {ticket.tripId.routeId.destination.province}
-			</Text>
-			<Text style={styles.text}>
-				Location: {ticket.tripId.routeId.origin.location} to {ticket.tripId.routeId.destination.location}
-			</Text>
-			<Text style={styles.title}>
-				Set Off at: {ticket.tripId.setOffDay} {ticket.tripId.setOffTime}
-			</Text>
-			<Text style={styles.title}>Bus: {ticket.tripId.busId.plate}</Text>
-			<Text style={styles.title}>
-				Client: {user.firstName} {user.lastName}
-			</Text>
-			<Text style={styles.title}>
-				Staff: {staff.firstName} {staff.lastName}
-			</Text>
-			<Text style={styles.title}>Staff ID: {staff.id}</Text>
-
-			<Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `${pageNumber}/${totalPages}`} fixed></Text>
-		</Page>
-	</Document>;
-
+const PDFFile = (props) => {
 	return (
-		<>
-			<div>PDFILE</div>
-		</>
+		<Document>
+			<Page size='A5'>
+				<Text style={styles.title}>TICKET</Text>
+				<Text style={styles.text}>
+					Route: {props.ticket.tripId.routeId.origin.province} to {props.ticket.tripId.routeId.destination.province}
+				</Text>
+				<Text style={styles.text}>
+					Location: {props.ticket.tripId.routeId.origin.location} to {props.ticket.tripId.routeId.destination.location}
+				</Text>
+				<Text style={styles.title}>
+					Set Off at: {props.ticket.tripId.setOffDay} {props.ticket.tripId.setOffTime}
+				</Text>
+				<Text style={styles.title}>Bus: {props.ticket.tripId.busId.plate}</Text>
+				<Text style={styles.title}>
+					Client: {props.user.firstName} {props.user.lastName}
+				</Text>
+				<Text style={styles.title}>
+					Staff: {props.staff.firstName} {props.staff.lastName}
+				</Text>
+				<Text style={styles.title}>Staff ID: {props.staff.id}</Text>
+
+				<Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `${pageNumber}/${totalPages}`} fixed></Text>
+			</Page>
+		</Document>
 	);
 };
 

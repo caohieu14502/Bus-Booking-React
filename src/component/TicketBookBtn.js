@@ -3,7 +3,9 @@ import { MyCartContext } from "../App";
 import cookie from "react-cookies";
 
 const TicketBookBtn = (props) => {
-	const [isChoose, setIsChoose] = useState(false);
+	let cart = cookie.load("cart") || null;
+	// const [isChoose, setIsChoose] = useState(false);
+	const [isChoose, setIsChoose] = useState(props.id in cart);
 	const [, cartDispatch] = useContext(MyCartContext);
 
 	const booking = (propsValue) => {
@@ -16,10 +18,9 @@ const TicketBookBtn = (props) => {
 		cartDispatch(dispatching);
 		setIsChoose(!isChoose);
 
-		let cart = cookie.load("cart") || null;
 		if (cart === null) cart = {};
 		if (propsValue.id in cart) {
-			// remove cart
+			delete cart[propsValue.id];
 		} else {
 			cart[propsValue.id] = {
 				id: propsValue.id,

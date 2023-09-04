@@ -1,3 +1,5 @@
+import Moment from "react-moment";
+
 const TripItem = (props) => {
 	return (
 		<>
@@ -7,7 +9,9 @@ const TripItem = (props) => {
 				</div>
 				<div className='info flex justify-around items-center w-3/6'>
 					<div className='from w-3/6'>
-						<h3 className='text-3xl text-[#20415B]'>{props.setOffTime}</h3>
+						<h3 className='text-3xl text-[#20415B]'>
+							<Moment format='LT'>{props.setOffTime}</Moment>
+						</h3>
 						<h5 className='text-base text-[#446893]'>{props.routeId.origin.location}</h5>
 
 						<p className='uppercase text-[10px] font-semibold text-[#699BC5]'>{props.routeId.origin.province}</p>

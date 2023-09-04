@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import MySpinner from "../component/MySpinner";
 import Api, { endpoints } from "../configs/Api";
 import TicketListTrip from "../component/TicketListTrip";
+import CommentSection from "../component/CommentSection";
 
 const TripDetail = () => {
 	const { tripId } = useParams();
@@ -39,6 +40,9 @@ const TripDetail = () => {
 					PAY
 				</button>
 			</div>
+			<br />
+			<div className='border-b-2 border-b-cyan-500'></div>
+			<CommentSection tripId={tripId} />
 		</>
 	);
 };
