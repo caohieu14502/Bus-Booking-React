@@ -3,27 +3,40 @@ import HomeRegister from "../component/HomeRegister";
 import GoodComments from "../component/GoodComments";
 import Api, { endpoints } from "../configs/Api";
 import MySpinner from "../component/MySpinner";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import Pagination from "../component/Pagination";
 
 const Home = () => {
+	const [currentPage, setCurrentPage] = useState(1);
 	const [routes, setRoutes] = useState(null);
-	// Paied Context
+	const [pageRoute, setPageRoute] = useState(1);
+
+	const loadRoutes = async (x) => {
+		try {
+			let res1 = await Api.get(endpoints["routes"](x));
+			setRoutes(res1.data);
+		} catch (ex) {
+			console.error(ex);
+		}
+	};
 
 	useEffect(() => {
-		const loadRoutes = async () => {
-			// let res = await fetch(
-			// 	"http://localhost:8080/BusBookingApp/api/routes?page=1"
-			// );
-			// let data = await res.json();
+		const loadPageSize = async () => {
 			try {
-				let res = await Api.get(endpoints["routes"]);
-				setRoutes(res.data);
+				let res2 = await Api.get(endpoints["pageRoutes"]);
+				setPageRoute(res2.data);
 			} catch (ex) {
 				console.error(ex);
 			}
 		};
-		loadRoutes();
+		loadRoutes(currentPage);
+		loadPageSize();
 	}, []);
+
+	const changePage = (x) => {
+		setCurrentPage(x);
+		loadRoutes(currentPage);
+	};
 
 	if (routes === null)
 		return (
@@ -34,7 +47,7 @@ const Home = () => {
 	return (
 		<>
 			<GoodComments />
-			<div className='bg-[#F2F6F8] h-[720px] w-full mt-16 '>
+			<div className='bg-[#F2F6F8] h-[740px] w-full mt-16 '>
 				<div className='text-[#20415B] mb-4 font-[900] text-[32px] text-center py-8'>Top travelled bus routes</div>
 				<div className='container grid grid-cols-3 gap-12 m-auto flex-wrap'>
 					{routes.map((r) => {
@@ -55,6 +68,7 @@ const Home = () => {
 						);
 					})}
 				</div>
+				<div className='flex justify-center mt-6'>{pageRoute < 2 ? "" : <Pagination pageSize={pageRoute} currentPage={currentPage} />}</div>
 			</div>
 			<HomeRegister />
 		</>

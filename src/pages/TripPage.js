@@ -47,7 +47,7 @@ const TripPage = () => {
 
 	return (
 		<>
-			<h1>TRIP PAGE</h1>
+			<h1 class='mx-auto mb-6 font-semibold text-[#0274CA] text-5xl text-center sm:text-5xl md:text-6xl xl:text-7xl dark:text-white'>TRIPS</h1>
 			<div className='grid grid-rows-1 gap-4'>
 				{trips.map((t) => (
 					<TripItem {...t} key={t.id} onClick={() => nav(`/trips/${t.id}`)} />

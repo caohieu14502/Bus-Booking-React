@@ -6,10 +6,12 @@ const SERVER = "http://localhost:8080";
 
 export const endpoints = {
 	stations: `${SERVER_CONTEXT}/api/stations/`,
-	routes: `${SERVER_CONTEXT}/api/routes/`,
+	routes: (page) => `${SERVER_CONTEXT}/api/routes?page=${page}`,
+	pageRoutes: `${SERVER_CONTEXT}/api/routes/pageSize/`,
 	trips: `${SERVER_CONTEXT}/api/trips/`,
 	tripDetail: (tripId) => `${SERVER_CONTEXT}/api/trips/${tripId}`,
 	ticketsTrip: (tripId) => `${SERVER_CONTEXT}/api/tickets/?tripId=${tripId}`,
+	myTickets: (param) => `${SERVER_CONTEXT}/api/tickets/?myTickets=${param}`,
 	login: `${SERVER_CONTEXT}/api/login/`,
 	register: `${SERVER_CONTEXT}/api/users/`,
 	currentUser: `${SERVER_CONTEXT}/api/current-user/`,

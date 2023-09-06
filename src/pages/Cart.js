@@ -36,6 +36,9 @@ const Cart = () => {
 				cookie.remove("cart");
 				setCarts([]);
 				setIsPaid(true);
+				cartDispatch({
+					type: "paid",
+				});
 			}
 		};
 		process();

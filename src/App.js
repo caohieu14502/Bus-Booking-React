@@ -12,6 +12,7 @@ import TripDetail from "./pages/TripDetail";
 import MyCartCounterReducer from "./reducers/MyCartCounterReducer";
 import Cart from "./pages/Cart";
 import PrintTicket from "./pages/PrintTicket";
+import MyTrips from "./pages/MyTrips";
 
 export const MyUserContext = createContext();
 export const MyCartContext = createContext();
@@ -39,6 +40,7 @@ const App = () => {
 						<Route path='/register' element={<Register />} />
 						<Route path='/cart' element={<Cart />} />
 						<Route path='/printTicket' element={<PrintTicket />} />
+						<Route path='/myTrips' element={<MyTrips />} />
 					</Routes>
 					<Footer />
 				</BrowserRouter>

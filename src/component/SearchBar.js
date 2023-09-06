@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
 	const [stations, setStations] = useState([]);
-	const [formInput, setFormInput] = useState({ origin: "", destination: "", busType: "", setOffTime: new Date().toISOString().split("T")[0] });
+	const [formInput, setFormInput] = useState({ origin: "", destination: "", setOffDay: new Date().toISOString().split("T")[0], setOffTime: new Date().toISOString().split("T")[1] });
 
 	const nav = useNavigate();
 
@@ -61,8 +61,8 @@ const SearchBar = () => {
 						})}
 					</ul>
 				</TEInput>
-				<TEInput type='number' id='seatsSearch' min={4} label="Bus's seats" className='h-14 pr-2' />
-				<TEInput type='date' id='dateSearch' label='Date' min={new Date().toISOString().split("T")[0]} value={formInput.setOffTime} onChange={(event) => setFormInput({ ...formInput, setOffTime: event.target.value })} className='h-14 pr-2' />
+				<TEInput type='date' id='dateSearch' label='Date' min={new Date().toISOString().split("T")[0]} value={formInput.setOffDay} onChange={(event) => setFormInput({ ...formInput, setOffDay: event.target.value })} className='h-14 pr-2' />
+				<TEInput type='time' id='timeSearch' label='Time' value={formInput.setOffTime} onChange={(event) => setFormInput({ ...formInput, setOffTime: event.target.value })} className='h-14 pr-2' />
 			</div>
 
 			<TERipple className=' bg-submain transition duration-300 hover:scale-105 delay-100 ease-in-out rounded-xl ml-8 w-40 hover:shadow-indigo-500/40 shadow-2xl text-white hover:bg-btnHover' rippleColor='light'>

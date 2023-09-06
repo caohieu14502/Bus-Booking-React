@@ -49,8 +49,6 @@ const CommentSection = ({ tripId }) => {
 
 	if (comments === null) return <MySpinner />;
 
-	console.log(comments);
-
 	return (
 		<>
 			{user === null ? (

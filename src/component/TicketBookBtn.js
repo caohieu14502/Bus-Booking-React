@@ -3,7 +3,9 @@ import { MyCartContext } from "../App";
 import cookie from "react-cookies";
 
 const TicketBookBtn = (props) => {
-	let cart = cookie.load("cart") || null;
+	// let cart = cookie.load("cart") || null;
+	let cart = cookie.load("cart") || {};
+
 	// const [isChoose, setIsChoose] = useState(false);
 	const [isChoose, setIsChoose] = useState(props.id in cart);
 	const [, cartDispatch] = useContext(MyCartContext);
@@ -13,7 +15,10 @@ const TicketBookBtn = (props) => {
 			type: "inc",
 		};
 		if (isChoose) {
+			props.setTotal(props.total - props.price);
 			dispatching = { ...dispatching, type: "dec" };
+		} else {
+			props.setTotal(props.total + props.price);
 		}
 		cartDispatch(dispatching);
 		setIsChoose(!isChoose);

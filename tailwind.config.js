@@ -1,11 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	mode: "jit",
-	content: [
-		"./index.html",
-		"./src/**/*.{js,ts,jsx,tsx}",
-		"./node_modules/tw-elements-react/dist/js/**/*.js",
-	],
+	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./node_modules/tw-elements-react/dist/js/**/*.js"],
 	theme: {
 		extend: {
 			colors: {
