@@ -15,6 +15,7 @@ const Header = () => {
 		dispatch({
 			type: "logout",
 		});
+		nav("/login");
 	};
 
 	return (

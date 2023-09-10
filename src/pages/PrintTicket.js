@@ -62,7 +62,7 @@ const PrintTicket = () => {
 					</div>
 				</div>
 
-				{tickets === null ? "chua co gi" : <PrintableTickets tickets={tickets} user={user} />}
+				{tickets === null ? "Nhập mail của User" : <PrintableTickets tickets={tickets} user={user} />}
 			</div>
 		</>
 	);

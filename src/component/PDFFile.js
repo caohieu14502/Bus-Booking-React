@@ -48,7 +48,9 @@ const PDFFile = (props) => {
 					Location: {props.ticket.tripId.routeId.origin.location} to {props.ticket.tripId.routeId.destination.location}
 				</Text>
 				<Text style={styles.title}>
-					Set Off at: {props.ticket.tripId.setOffDay} {props.ticket.tripId.setOffTime}
+					Set Off at:
+					{props.ticket.tripId.setOffDay}--
+					{props.ticket.tripId.setOffTimeString}
 				</Text>
 				<Text style={styles.title}>Bus: {props.ticket.tripId.busId.plate}</Text>
 				<Text style={styles.title}>

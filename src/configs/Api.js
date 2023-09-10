@@ -9,6 +9,7 @@ export const endpoints = {
 	routes: (page) => `${SERVER_CONTEXT}/api/routes?page=${page}`,
 	pageRoutes: `${SERVER_CONTEXT}/api/routes/pageSize/`,
 	trips: `${SERVER_CONTEXT}/api/trips/`,
+	pageTrips: `${SERVER_CONTEXT}/api/trips/pageSize/`,
 	tripDetail: (tripId) => `${SERVER_CONTEXT}/api/trips/${tripId}`,
 	ticketsTrip: (tripId) => `${SERVER_CONTEXT}/api/tickets/?tripId=${tripId}`,
 	myTickets: (param) => `${SERVER_CONTEXT}/api/tickets/?myTickets=${param}`,
@@ -19,8 +20,8 @@ export const endpoints = {
 	printTicket: `${SERVER_CONTEXT}/api/printTicket/`,
 	pay: `${SERVER_CONTEXT}/api/pay/`,
 	addComment: `${SERVER_CONTEXT}/api/comments/`,
-	googleTest: `${SERVER_CONTEXT}/api/login/google/`,
 	comment: (tripId) => `${SERVER_CONTEXT}/api/trips/${tripId}/comments`,
+	googleTest: `${SERVER_CONTEXT}/api/login/google/`,
 };
 
 export const authApi = () => {

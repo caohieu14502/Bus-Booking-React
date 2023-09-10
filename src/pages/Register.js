@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { TEInput } from "tw-elements-react";
 import Api, { endpoints } from "../configs/Api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MySpinner from "../component/MySpinner";
 
 const Register = () => {
@@ -73,9 +73,9 @@ const Register = () => {
 					<div className='mt-4 text-grey-600'>
 						Already have an account?{" "}
 						<span>
-							<a className='text-purple-600 hover:underline' href='#'>
+							<Link className='text-purple-600 hover:underline' to='/login'>
 								Log in
-							</a>
+							</Link>
 						</span>
 					</div>
 					<div className='flex items-center w-full my-4'>

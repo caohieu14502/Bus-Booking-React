@@ -7,7 +7,7 @@ import { MyUserContext } from "../App";
 import { Link } from "react-router-dom";
 
 const CommentSection = ({ tripId }) => {
-	const [comments, setComments] = useState(null);
+	const [comments, setComments] = useState([]);
 	const [user] = useContext(MyUserContext);
 	const [content, setContent] = useState(null);
 	const [rate, setRate] = useState(1);
@@ -23,7 +23,11 @@ const CommentSection = ({ tripId }) => {
 		loadComments();
 	}, []);
 
-	const addComment = () => {
+	const addComment = (e) => {
+		e.preventDefault();
+		if (content === null) {
+			return;
+		}
 		const process = async () => {
 			let { data } = await authApi().post(endpoints["addComment"], {
 				content: content,
@@ -31,6 +35,7 @@ const CommentSection = ({ tripId }) => {
 				stars: rate,
 			});
 			setComments([...comments, data]);
+			// setComments(comments.unshift(data));
 		};
 		process();
 	};
@@ -44,10 +49,10 @@ const CommentSection = ({ tripId }) => {
 		setRateHover(c);
 	};
 
-	console.log(comments);
+	console.log(tripId);
 	let url = `/login?next=/trips/${tripId}`;
 
-	if (comments === null) return <MySpinner />;
+	if (comments.length === 0) return <MySpinner />;
 
 	return (
 		<>
@@ -90,7 +95,7 @@ const CommentSection = ({ tripId }) => {
 							</div>
 						</div>
 						<button
-							onClick={addComment}
+							onClick={(e) => addComment(e)}
 							className='inline-block absolute right-1/4 max-w-[150px] focus:border-8 rounded hover:shadow-indigo-500/40 hover:bg-btnHover bg-primary-500 transition duration-300 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-btnHover focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-btnHover active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]'>
 							Comment
 						</button>

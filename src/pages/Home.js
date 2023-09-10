@@ -3,7 +3,7 @@ import HomeRegister from "../component/HomeRegister";
 import GoodComments from "../component/GoodComments";
 import Api, { endpoints } from "../configs/Api";
 import MySpinner from "../component/MySpinner";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Pagination from "../component/Pagination";
 
 const Home = () => {
@@ -35,7 +35,7 @@ const Home = () => {
 
 	const changePage = (x) => {
 		setCurrentPage(x);
-		loadRoutes(currentPage);
+		loadRoutes(x);
 	};
 
 	if (routes === null)
@@ -68,7 +68,7 @@ const Home = () => {
 						);
 					})}
 				</div>
-				<div className='flex justify-center mt-6'>{pageRoute < 2 ? "" : <Pagination pageSize={pageRoute} currentPage={currentPage} />}</div>
+				<div className='flex justify-center mt-6'>{pageRoute < 2 ? "" : <Pagination pageSize={pageRoute} currentPage={currentPage} changePage={changePage} />}</div>
 			</div>
 			<HomeRegister />
 		</>

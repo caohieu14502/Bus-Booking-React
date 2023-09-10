@@ -3,24 +3,44 @@ import TripItem from "../component/TripItem";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Api, { endpoints } from "../configs/Api";
 import MySpinner from "../component/MySpinner";
+import Pagination from "../component/Pagination";
 
 const TripPage = () => {
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pageTrip, setPageTrip] = useState(1);
 	const [trips, setTrips] = useState(null);
 	const [q] = useSearchParams();
 	const nav = useNavigate();
+
+	let loadTrips = async (x) => {
+		let e = endpoints["trips"];
+		e = `${e}?page=${x}`;
+		if (q != null) e = `${e}&${q}`;
+		try {
+			let res = await Api.get(e);
+			setTrips(res.data);
+		} catch (ex) {
+			console.error(ex);
+		}
+	};
+
 	useEffect(() => {
-		let loadTrips = async () => {
-			let e = endpoints["trips"];
-			if (q != null) e = `${e}?${q}`;
+		const loadPageSize = async () => {
 			try {
-				let res = await Api.get(e);
-				setTrips(res.data);
+				let res2 = await Api.get(endpoints["pageTrips"]);
+				setPageTrip(res2.data);
 			} catch (ex) {
 				console.error(ex);
 			}
 		};
-		loadTrips();
+		loadTrips(currentPage);
+		loadPageSize();
 	}, [q]);
+
+	const changePage = (x) => {
+		setCurrentPage(x);
+		loadTrips(x);
+	};
 
 	if (trips === null)
 		return (
@@ -53,6 +73,7 @@ const TripPage = () => {
 					<TripItem {...t} key={t.id} onClick={() => nav(`/trips/${t.id}`)} />
 				))}
 			</div>
+			<div className='flex justify-center mt-6'>{pageTrip < 2 ? "" : <Pagination pageSize={pageTrip} currentPage={currentPage} changePage={changePage} />}</div>
 		</>
 	);
 };
